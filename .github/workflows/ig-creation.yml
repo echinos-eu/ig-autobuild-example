@@ -34,3 +34,14 @@ jobs:
           curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o ./input-cache/publisher.jar --create-dirs
           echo "Run the IG publisher..."
           java -jar ./input-cache/publisher.jar publisher -ig .
+          unzip output/full-ig.zip -d upload/
+          
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1.0.9
+        with:
+          # Artifact name
+          #name: # optional, default is github-pages
+          # Path of the directory containing the static assets.
+          path: upload/
+          # Duration after which artifact will expire in days.
+          #retention-days: # optional, default is 1    
